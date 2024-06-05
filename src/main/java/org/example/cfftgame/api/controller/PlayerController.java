@@ -57,6 +57,7 @@ public class PlayerController {
      * @return
      */
     @GetMapping("/{playerId}")
+    @CrossOrigin("*")
     public ResultVO getPlayerInfo(@PathVariable int playerId) {
         // 使用 QueryWrapper 查询玩家信息
         QueryWrapper<Player> queryWrapper = new QueryWrapper<>();
@@ -102,6 +103,7 @@ public class PlayerController {
     // 根据玩家经验值升级玩家
     @PostMapping("/{playerId}/upgrade")
     @Transactional
+    @CrossOrigin("*")
     public ResultVO upgradePlayer(@PathVariable int playerId) {
         // 使用 QueryWrapper 查询玩家信息
         QueryWrapper<Player> playerQueryWrapper = new QueryWrapper<>();
@@ -163,6 +165,7 @@ public class PlayerController {
 
     // 获取玩家任务列表，根据玩家ID
     @GetMapping("/{playerId}/tasks")
+    @CrossOrigin("*")
     public ResultVO getPlayerTasks(@PathVariable int playerId) {
         // 使用 QueryWrapper 查询玩家任务
         QueryWrapper<PlayerTask> queryWrapper = new QueryWrapper<>();
@@ -180,6 +183,7 @@ public class PlayerController {
      */
     // 完成任务
     @PostMapping("/{playerId}/task/{taskId}/claim")
+    @CrossOrigin("*")
     public ResultVO claimTaskReward(@PathVariable int playerId, @PathVariable int taskId) {
         // 使用 QueryWrapper 查询玩家任务
         QueryWrapper<PlayerTask> queryWrapper = new QueryWrapper<>();
@@ -234,6 +238,7 @@ public class PlayerController {
      * @return
      */
     @PostMapping("/{playerId}/task/{taskId}/abandon")
+    @CrossOrigin("*")
     public ResultVO abandonTask(@PathVariable int playerId, @PathVariable int taskId) {
         // 使用 QueryWrapper 查询玩家任务
         QueryWrapper<PlayerTask> queryWrapper = new QueryWrapper<>();

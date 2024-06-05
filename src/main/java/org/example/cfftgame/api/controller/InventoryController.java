@@ -35,6 +35,7 @@ public class InventoryController {
      * @param rewardItemTypeJson
      */
     @PostMapping("/add")
+    @CrossOrigin("*")
     public void addRewardToPlayerInventory(int playerId, String rewardItemTypeJson) {
         // 使用 Jackson 将 JSON 转换为 RewardItem 列表
         ObjectMapper objectMapper = new ObjectMapper();
@@ -77,6 +78,7 @@ public class InventoryController {
      * @return
      */
     @GetMapping("/info/{playerId}")
+    @CrossOrigin("*")
     public ResultVO getMushroomInfo(@PathVariable int playerId, @RequestParam("category") String category) {
         // 验证 category 是否符合预期的 ENUM 类型值
         if (!Category.isValid(category)) {
@@ -103,6 +105,7 @@ public class InventoryController {
      * @return
      */
     @PostMapping("/sell")
+    @CrossOrigin("*")
     public ResultVO sellItem(@RequestParam int playerId, @RequestParam int id, @RequestParam int quantity) {
         // 检查物品是否存在于玩家背包中
         QueryWrapper<PlayerInventory> queryWrapper = new QueryWrapper<>();

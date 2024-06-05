@@ -2,15 +2,14 @@ package org.example.cfftgame.api.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.example.cfftgame.common.vo.ResultVO;
-import org.example.cfftgame.domain.Player;
-import org.example.cfftgame.domain.PlayerInventory;
-import org.example.cfftgame.domain.ShopItem;
-import org.example.cfftgame.domain.ShopItemType;
-import org.example.cfftgame.service.PlayerInventoryService;
-import org.example.cfftgame.service.PlayerService;
-import org.example.cfftgame.service.ShopItemService;
+import org.example.cfftgame.domain.*;
+import org.example.cfftgame.domain.vo.ShopItemVO;
+import org.example.cfftgame.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/shop")
 public class ShopController {
@@ -23,9 +22,14 @@ public class ShopController {
 
     @Autowired
     private PlayerInventoryService playerInventoryService;
+    @Autowired
+    private ShopMushroomService shopMushroomService;
+    private ShopFertilizerService shopFertilizerService;
+    private ShopSkinService shopSkinService;
 
     // 服务端上架商品
     @PostMapping("/addItem")
+    @CrossOrigin("*")
     public ResultVO addItem(@RequestBody ShopItem shopItem) {
         try {
             ShopItemType.fromString(shopItem.getItemType().toString()); // 验证 itemType
@@ -42,6 +46,7 @@ public class ShopController {
 
     // 用户购买商品
     @PostMapping("/buy")
+    @CrossOrigin("*")
     public ResultVO buyItem(@RequestParam int playerId, @RequestParam int itemId) {
         // 获取商品信息
         ShopItem shopItem = shopItemService.getById(itemId);
@@ -85,4 +90,22 @@ public class ShopController {
 
         return ResultVO.success("购买成功");
     }
+    @GetMapping("/items")
+    @CrossOrigin("*")
+    public ResultVO getShopItems(@RequestParam String itemType) {
+        switch (itemType.toLowerCase()) {
+            case "mushroom_seed":
+                List<ShopMushroom> mushrooms = shopMushroomService.list();
+                return ResultVO.success(mushrooms);
+            case "fertilizer":
+                List<ShopFertilizer> fertilizers = shopFertilizerService.list();
+                return ResultVO.success(fertilizers);
+            case "skin":
+                List<ShopSkin> skins = shopSkinService.list();
+                return ResultVO.success(skins);
+            default:
+                return ResultVO.error("无效的商品类型");
+        }
+    }
+
 }

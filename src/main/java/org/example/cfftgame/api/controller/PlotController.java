@@ -41,6 +41,7 @@ public class PlotController {
      */
     // 购买解锁地块
     @PostMapping("/unlock")
+    @CrossOrigin("*")
     public ResultVO unlockPlot(@RequestParam int playerId, @RequestParam int plotNumber) {
         // 检查该地块是否已经被解锁
         QueryWrapper<Plot> queryWrapper = new QueryWrapper<>();
@@ -85,6 +86,7 @@ public class PlotController {
      */
     // 种植蘑菇
     @PostMapping("/plant")
+    @CrossOrigin("*")
     public ResultVO plantMushroom(@RequestParam int playerId, @RequestParam int plotNumber, @RequestParam int inventoryId) {
         // 检查地块是否已解锁
         QueryWrapper<Plot> plotQueryWrapper = new QueryWrapper<>();
@@ -131,6 +133,7 @@ public class PlotController {
      * @return
      */
     @PostMapping("/water")
+    @CrossOrigin("*")
     public ResultVO waterMushroom(@RequestParam int playerId, @RequestParam int farmMushroomId) {
         // 获取农场蘑菇信息
         Optional<FarmMushroom> farmMushroomOpt = Optional.ofNullable(farmMushroomService.getById(farmMushroomId));
@@ -153,6 +156,7 @@ public class PlotController {
      * @return
      */
     @PostMapping("/pesticide")
+    @CrossOrigin("*")
     public ResultVO pesticideMushroom(@RequestParam int playerId, @RequestParam int farmMushroomId) {
         // 获取农场蘑菇信息
         Optional<FarmMushroom> farmMushroomOpt = Optional.ofNullable(farmMushroomService.getById(farmMushroomId));
@@ -189,6 +193,7 @@ public class PlotController {
      * @return
      */
     @PostMapping("/fertilize")
+    @CrossOrigin("*")
     public ResultVO fertilizeMushroom(@RequestParam int farmMushroomId, @RequestParam int fertilizerId) {
         // 获取农场蘑菇信息
         Optional<FarmMushroom> farmMushroomOpt = Optional.ofNullable(farmMushroomService.getById(farmMushroomId));
@@ -228,6 +233,7 @@ public class PlotController {
      * @return
      */
     @PostMapping("/harvest")
+    @CrossOrigin("*")
     public ResultVO harvestMushroom(@RequestParam int playerId, @RequestParam int farmMushroomId) {
         // 获取农场蘑菇信息
         Optional<FarmMushroom> farmMushroomOpt = Optional.ofNullable(farmMushroomService.getById(farmMushroomId));
@@ -298,6 +304,7 @@ public class PlotController {
      * @return
      */
     @PostMapping("/remove")
+    @CrossOrigin("*")
     public ResultVO removeMushroom(@RequestParam int playerId, @RequestParam int farmMushroomId) {
         // 获取农场蘑菇信息
         Optional<FarmMushroom> farmMushroomOpt = Optional.ofNullable(farmMushroomService.getById(farmMushroomId));

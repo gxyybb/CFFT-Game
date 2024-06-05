@@ -1,8 +1,5 @@
 package org.example.cfftgame.domain;
 
-import lombok.Getter;
-
-@Getter
 public enum ShopItemType {
     MUSHROOM_SEED("mushroom_seed"),
     FERTILIZER("fertilizer"),
@@ -12,6 +9,10 @@ public enum ShopItemType {
 
     ShopItemType(String type) {
         this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 
     @Override
